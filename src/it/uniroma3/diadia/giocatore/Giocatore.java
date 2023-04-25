@@ -35,5 +35,15 @@ public class Giocatore {
 		return risultato.toString();
 		
 	}
+
+
+	public Borsa getBorsa() {
+		
+		return this.borsa;
+	}
+	
+	public void setBorsa(Borsa b) {
+		this.borsa=b;
+	}
 	
 }

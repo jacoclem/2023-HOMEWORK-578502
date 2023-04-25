@@ -23,7 +23,7 @@ public class Borsa {
 		if (this.numeroAttrezzi==10)
 			return false;
 		this.attrezzi[this.numeroAttrezzi] = attrezzo;
-		this.numeroAttrezzi++;
+		this.numeroAttrezzi = this.numeroAttrezzi + 1;
 		return true;
 	}
 

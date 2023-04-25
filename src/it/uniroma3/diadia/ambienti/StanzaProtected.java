@@ -12,14 +12,14 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * @version base
  */
 
-public class Stanza {
+public class StanzaProtected {
 
-	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
-	static final int NUMERO_MASSIMO_ATTREZZI = 10;
+	static final protected int NUMERO_MASSIMO_DIREZIONI = 4;
+	static final protected int NUMERO_MASSIMO_ATTREZZI = 10;
 
 	private String nome;
-	private Attrezzo[] attrezzi;
-	private int numeroAttrezzi;
+	protected Attrezzo[] attrezzi;
+	protected int numeroAttrezzi;
 	private Stanza[] stanzeAdiacenti;
 	private int numeroStanzeAdiacenti;
 	private String[] direzioni;
@@ -28,7 +28,7 @@ public class Stanza {
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
 	 * @param nome il nome della stanza
 	 */
-	public Stanza(String nome) {
+	public StanzaProtected(String nome) {
 		this.nome = nome;
 		this.numeroStanzeAdiacenti = 0;
 		this.numeroAttrezzi = 0;
@@ -85,15 +85,6 @@ public class Stanza {
 	public String getDescrizione() {
 		return "Stanza Corrente: " + this.toString();
 	}
-	
-	
-	/**
-	 * Restituisce il numero di stanze adiacenti
-	 */
-	public int getNumeroStanzeAdiacenti() {
-		return this.numeroStanzeAdiacenti;
-	}
-	
 
 	/**
 	 * Restituisce la collezione di attrezzi presenti nella stanza.
@@ -144,7 +135,8 @@ public class Stanza {
 	 * @return true se l'attrezzo esiste nella stanza, false altrimenti.
 	 */
 	public boolean hasAttrezzo(String nomeAttrezzo) {
-		boolean trovato = false;
+		boolean trovato;
+		trovato = false;
 		for(int i=0; i<this.numeroAttrezzi; i++) {
 			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
 				trovato = true;

@@ -27,6 +27,13 @@ public class Partita {
 		
 	}
 	
+	public Giocatore getGiocatore() {
+		return this.giocatore;
+	}
+	
+	public void setGiocatore(Giocatore giocatore) {
+		this.giocatore=giocatore;
+	}
 	
 	/**
 	 * Funzione che modifica la stanza corrente
@@ -70,6 +77,11 @@ public class Partita {
 	 */
 	public void setFinita() {
 		this.finita = true;
+	}
+	
+	
+	public boolean giocatoreIsVivo() {
+		return !(this.getGiocatore().getCfu()==0);
 	}
 
 
