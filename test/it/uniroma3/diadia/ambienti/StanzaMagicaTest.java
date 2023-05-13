@@ -47,19 +47,5 @@ class StanzaMagicaTest {
 		assertEquals(new Attrezzo("ocigam", 2), ocigam);
 	}
 	
-	@Test
-	final void testTroppiAttrezzi() {
-		for(int i=0;i<StanzaProtected.NUMERO_MASSIMO_ATTREZZI;i++)
-		{
-			Attrezzo attrezzoNuovo = new Attrezzo("attrezzo", 1);
-			assertTrue(this.stanza.addAttrezzo(attrezzoNuovo));
-		}
-		Attrezzo magico = new Attrezzo("magico", 1);
-		this.stanza.addAttrezzo(magico);
-		assertNull(this.stanza.getAttrezzo("magico"));
-		assertNotNull(this.stanza.getAttrezzo("ocigam"));
-		Attrezzo ocigam = this.stanza.getAttrezzo("ocigam");
-		assertEquals(new Attrezzo("ocigam", 2), ocigam);
-	}
 	
 }

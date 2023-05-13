@@ -34,16 +34,21 @@ class StanzaTest {
 	@Test
 	final void testhasAttrezzo() {
 		assertFalse(this.vuota.hasAttrezzo("libro"));
+		assertTrue(this.nonVuota.hasAttrezzo("spada"));
+		assertFalse(this.nonVuota.hasAttrezzo("libro"));
 	}
 	
 	@Test
 	final void testGetAttrezzo() {
-		assertSame(this.spada, this.nonVuota.getAttrezzo("spada"));
+		assertEquals(this.spada, this.nonVuota.getAttrezzo("spada"));
+		assertEquals(null, this.vuota.getAttrezzo("spada"));
 	}
 	
 	@Test
 	final void testRemoveAttrezzo() {
-		assertSame(this.spada, this.nonVuota.removeAttrezzo(this.spada));
-		assertSame(null, this.vuota.removeAttrezzo(this.spada));
+		assertEquals(this.spada, this.nonVuota.removeAttrezzo(this.spada));
+		assertFalse(this.nonVuota.hasAttrezzo("spada"));
+		assertEquals(null, this.vuota.removeAttrezzo(this.spada));
+		
 	}
 }

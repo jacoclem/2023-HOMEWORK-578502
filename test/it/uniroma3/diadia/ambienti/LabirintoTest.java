@@ -13,20 +13,23 @@ class LabirintoTest {
 
 	@BeforeEach
 	public void setUp() {
-		labirinto = new Labirinto();
-		stanzaVincente = new Stanza("Biblioteca");
+		labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("atrio")
+				.addStanzaVincente("biblioteca")
+				.getLabirinto();
+		stanzaVincente = new Stanza("biblioteca");
 		stanzaIniziale = new Stanza("atrio");
 	}
 	
 
 	@Test
 	final void testGetStanzaVincente() {
-		assertSame(this.stanzaVincente.getNome(), this.labirinto.getStanzaVincente().getNome());
+		assertEquals(this.stanzaVincente, this.labirinto.getStanzaVincente());
 	}
 	
 	@Test
 	final void testGetStanzaIniziale() {
-		assertSame(this.stanzaIniziale.getNome(), this.labirinto.getStanzaIniziale().getNome());
+		assertEquals(this.stanzaIniziale, this.labirinto.getStanzaIniziale());
 	}
 
 

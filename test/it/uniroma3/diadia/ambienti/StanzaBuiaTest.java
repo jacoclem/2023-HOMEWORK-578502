@@ -17,7 +17,7 @@ class StanzaBuiaTest {
 	void setUp() throws Exception {
 		lanterna = new Attrezzo("lanterna", 1);
 		osso = new Attrezzo("osso", 1);
-		stanzaBuia = new StanzaBuia("stanzaBuia", lanterna);
+		stanzaBuia = new StanzaBuia("stanzaBuia", "lanterna");
 	}
 
 	@Test

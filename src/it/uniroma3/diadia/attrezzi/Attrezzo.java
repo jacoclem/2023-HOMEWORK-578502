@@ -50,12 +50,15 @@ public class Attrezzo {
 		return this.getNome()+" ("+this.getPeso()+"kg)";
 	}
 	
+	
+	
+	
 	/**
 	 * Equals
 	 */
 	public boolean equals(Object o) {
 		if(o==null) return false;
 		final Attrezzo that = (Attrezzo) o;
-		return this.getNome().equals(that.getNome());
+		return (this.getNome().equals(that.getNome())) && (this.getPeso()==that.getPeso());
 	}
 }
