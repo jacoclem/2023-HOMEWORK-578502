@@ -2,13 +2,16 @@ package it.uniroma3.diadia.comando;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.FormatoFileNonCorrettoException;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
@@ -26,12 +29,13 @@ class ComandoPrendiTest {
 	private Comando prendi;
 	
 	@BeforeEach
-	public void setUp() {
-		Labirinto labirinto = new LabirintoBuilder()
+	public void setUp() throws FileNotFoundException, FormatoFileNonCorrettoException {
+		/*Labirinto labirinto = new LabirintoBuilder()
 				.addStanzaIniziale("atrio")
 				.addStanzaVincente("biblioteca")
 				.addAdiacenza("atrio", "biblioteca", "nord")
-				.getLabirinto();
+				.getLabirinto();*/
+		Labirinto labirinto = Labirinto.newBuilder("Labirinto1.txt").getLabirinto();
 		p = new Partita(labirinto);
 		s = new Stanza("aula");
 		a1 = new Attrezzo("penna", 1);
@@ -40,7 +44,8 @@ class ComandoPrendiTest {
 		g = new Giocatore();
 		b = new Borsa();
 		prendi = new ComandoPrendi();
-		prendi.setIO(new IOConsole());
+		Scanner scanner = new Scanner(System.in);
+		prendi.setIO(new IOConsole(scanner));
 		p.setStanzaCorrente(s);
 		p.setGiocatore(g);
 		p.getGiocatore().setBorsa(b);

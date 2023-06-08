@@ -10,6 +10,8 @@ import java.util.Set;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.ComparatorePesoNome;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
+
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.
@@ -25,7 +27,9 @@ import it.uniroma3.diadia.giocatore.ComparatorePesoNome;
 public class Stanza {
 
 	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
-
+	private AbstractPersonaggio personaggio;
+	
+	
 
 	/*
 	 * Inserisco le nuove implementazioni con un 2 alla fine del nome
@@ -34,7 +38,7 @@ public class Stanza {
 	private String nome;
 	private Map<String, Attrezzo> attrezzi;
 
-	private Map<String, Stanza> direzioni;
+	private Map<Direzione, Stanza> direzioni;
 
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -46,13 +50,21 @@ public class Stanza {
 		this.attrezzi = new HashMap<>();
 	}
 
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio=personaggio;
+	}
+	
+	public AbstractPersonaggio getPersonaggio() {
+		return this.personaggio;
+	}
+	
 	/**
 	 * Imposta una stanza adiacente.
 	 *
 	 * @param direzione direzione in cui sara' posta la stanza adiacente.
 	 * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
 	 */
-	public boolean impostaStanzaAdiacente(String direzione, Stanza stanza) {
+	public boolean impostaStanzaAdiacente(Direzione direzione, Stanza stanza) {
 		if(this.direzioni.size()<NUMERO_MASSIMO_DIREZIONI) {
 			this.direzioni.put(direzione, stanza);
 			return true;
@@ -66,7 +78,7 @@ public class Stanza {
 	 * @param direzione
 	 */
 	public Stanza getStanzaAdiacente(String direzione) {
-		return this.direzioni.get(direzione);
+		return this.direzioni.get(Direzione.valueOf(direzione));
 	}
 
 	/**
@@ -115,6 +127,15 @@ public class Stanza {
 		return true;
 
 	}
+	
+	
+	//se esiste un personaggio lo sovrascrivo poichè in una stanza può esistere solo un personaggio
+	public boolean addPersonaggio(AbstractPersonaggio personaggio) {
+		
+			this.personaggio=personaggio;
+			return true;
+		
+	}
 
 	/**
 	 * Restituisce una rappresentazione stringa di questa stanza,
@@ -128,6 +149,11 @@ public class Stanza {
 		risultato.append(this.getDirezioni().toString());
 		risultato.append("\nAttrezzi nella stanza: ");
 		risultato.append(this.getAttrezzi().toString());
+		risultato.append("\nPersonaggi nella stanza: ");
+		if(this.personaggio==null)
+			risultato.append("Nessun personaggio nella stanza");
+		else
+			risultato.append(this.personaggio.getNome());
 		return risultato.toString();
 	}
 
@@ -166,7 +192,7 @@ public class Stanza {
 	}
 
 
-	public Map<String, Stanza> getMapStanzeAdiacenti() {
+	public Map<Direzione, Stanza> getMapStanzeAdiacenti() {
 
 		return 	this.direzioni;
 	}
@@ -193,10 +219,61 @@ public class Stanza {
 	}
 	
 
-	public Set<String> getDirezioni() {
+	public Set<Direzione> getDirezioni() {
 		return this.direzioni.keySet();
 	}
 
+	/**
+	 * Funzione che restituisce la stanza adiacente con più attrezzi
+	 * @return
+	 */
+	public Stanza getStanzaConMaxAttrezzi() {
+		Map<Direzione, Stanza> stanzeAdiacenti = this.getMapStanzeAdiacenti();
+		if(stanzeAdiacenti == null)
+			return null;
+		Stanza stanzaAttrezziMax=null;;
+		int attrezziMax=-1;
+		for(Stanza stanza : stanzeAdiacenti.values()) {
+			if(attrezziMax==-1)
+			{
+				attrezziMax = stanza.getNumeroAttrezzi();
+				stanzaAttrezziMax=stanza;
+			}
+			else {
+				if(stanza.getNumeroAttrezzi() > attrezziMax) {
+					attrezziMax = stanza.getNumeroAttrezzi();
+					stanzaAttrezziMax=stanza;
+				}
+			}
+		}
+		return stanzaAttrezziMax;
+	}
+	
+	/**
+	 * Funzione che restituisce la stanza con il numero minore di attrezzi
+	 * @return
+	 */
+	public Stanza getStanzaConMinAttrezzi() {
+		Map<Direzione, Stanza> stanzeAdiacenti = this.getMapStanzeAdiacenti();
+		if(stanzeAdiacenti == null)
+			return null;
+		Stanza stanzaAttrezziMax=null;;
+		int attrezziMax=-1;
+		for(Stanza stanza : stanzeAdiacenti.values()) {
+			if(attrezziMax==-1)
+			{
+				attrezziMax = stanza.getNumeroAttrezzi();
+				stanzaAttrezziMax=stanza;
+			}
+			else {
+				if(stanza.getNumeroAttrezzi() < attrezziMax) {
+					attrezziMax = stanza.getNumeroAttrezzi();
+					stanzaAttrezziMax=stanza;
+				}
+			}
+		}
+		return stanzaAttrezziMax;
+	}
 
 	@Override
 	public int hashCode() {

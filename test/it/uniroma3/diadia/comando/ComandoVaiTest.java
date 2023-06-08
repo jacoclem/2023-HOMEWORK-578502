@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +15,9 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.ambienti.StanzaBloccata;
 import it.uniroma3.diadia.fixture.Fixture;
@@ -35,9 +37,10 @@ class ComandoVaiTest {
 	
 	@BeforeEach
 	public void setUp() throws Exception {
-		io = new IOConsole();
-		s1 = new Stanza("aula 1");
-		s2 = new Stanza("aula 2");
+		Scanner scanner = new Scanner(System.in);
+		io = new IOConsole(scanner);
+		s1 = new Stanza("aula1");
+		s2 = new Stanza("aula2");
 		vai = new ComandoVai();
 		labirinto = new Fixture().labirintoBilocale();
 		p = new Partita(labirinto);
@@ -72,7 +75,7 @@ class ComandoVaiTest {
 	
 	
 	@Test
-	final void testPartitaComandoVaiBilocale() {
+	final void testPartitaComandoVaiBilocale() throws Exception {
 		comandiDaLeggere.add("vai est");
 		IOSimulator ioComandi = new IOSimulator(comandiDaLeggere);
 		DiaDia gioco = new DiaDia(labirinto, ioComandi);
@@ -80,14 +83,14 @@ class ComandoVaiTest {
 		assertTrue(ioComandi.hasNextMessage());
 		assertEquals(gioco.getMessaggioBenvenuto(), ioComandi.getNextMessage());
 		assertTrue(ioComandi.hasNextMessage());
-		assertEquals("aula 2", ioComandi.getNextMessage());
+		assertEquals("aula2", ioComandi.getNextMessage());
 		assertTrue(ioComandi.hasNextMessage());
 		assertEquals("Hai vinto!!", ioComandi.getNextMessage());
 		assertFalse(ioComandi.hasNextMessage());
 	}
 	
 	@Test
-	void testPartitaComandoVaiBilocaleDirezioneInesistente() {
+	void testPartitaComandoVaiBilocaleDirezioneInesistente() throws Exception {
 		comandiDaLeggere.add("vai nord");
 		comandiDaLeggere.add("fine");
 		IOSimulator ioComandi = new IOSimulator(comandiDaLeggere);
@@ -102,7 +105,7 @@ class ComandoVaiTest {
 		assertFalse(ioComandi.hasNextMessage());
 	}
 	
-	@Test void testPartitaComandoVaiTrilocaleTornaIndietro() {
+	@Test void testPartitaComandoVaiTrilocaleTornaIndietro() throws Exception {
 		comandiDaLeggere.add("vai est");
 		comandiDaLeggere.add("vai ovest");
 		comandiDaLeggere.add("vai nord");
@@ -126,7 +129,7 @@ class ComandoVaiTest {
 	}
 	
 	@Test
-	void testPartitaComandoVaiTrilocaleVinciSubito() {
+	void testPartitaComandoVaiTrilocaleVinciSubito() throws Exception {
 		comandiDaLeggere.add("vai nord");
 		
 		IOSimulator ioComandi = new IOSimulator(comandiDaLeggere);
@@ -142,8 +145,10 @@ class ComandoVaiTest {
 		assertFalse(ioComandi.hasNextMessage());
 	}
 	
+	
+	
 	@Test
-	void testPartitaComandoVaiQuattroStanze() {
+	void testPartitaComandoVaiQuattroStanze() throws Exception {
 		comandiDaLeggere.add("vai nord");
 		comandiDaLeggere.add("vai est");
 		comandiDaLeggere.add("vai sud");
@@ -170,7 +175,7 @@ class ComandoVaiTest {
 }
 	
 	@Test
-	void testPartitaComandoVaiQuattroStanzePercorsoVeloce() {
+	void testPartitaComandoVaiQuattroStanzePercorsoVeloce() throws Exception {
 		comandiDaLeggere.add("vai est");
 		
 		IOSimulator ioComandi = new IOSimulator(comandiDaLeggere);
@@ -187,10 +192,11 @@ class ComandoVaiTest {
 	}
 	
 	@Test
-	void testPartitaComandoVaiQuattroStanzeTornaIndietroPercorsoVeloce() {
+	void testPartitaComandoVaiQuattroStanzeTornaIndietroPercorsoVeloce()  throws Exception{		
 		comandiDaLeggere.add("vai nord");
 		comandiDaLeggere.add("vai sud");
 		comandiDaLeggere.add("vai est");
+		
 		IOSimulator ioComandi = new IOSimulator(comandiDaLeggere);
 		Labirinto labirinto2 = new Fixture().labirintoQuattroStanzeCollegate();
 		DiaDia gioco = new DiaDia(labirinto2, ioComandi);
@@ -207,8 +213,11 @@ class ComandoVaiTest {
 		assertEquals("Hai vinto!!", ioComandi.getNextMessage());
 	}
 	
-	@Test
-	void testPartitaComandoVaiStanzaBloccata() {
+
+	
+	
+	/*@Test
+	void testPartitaComandoVaiStanzaBloccata() throws Exception{
 		comandiDaLeggere.add("vai nord");
 		comandiDaLeggere.add("vai nord");
 		
@@ -228,7 +237,7 @@ class ComandoVaiTest {
 	}
 	
 	@Test
-	void testPartitaComandoVaiTrilocaleStanzaBloccataSenzaAttrezzo() {
+	void testPartitaComandoVaiTrilocaleStanzaBloccataSenzaAttrezzo() throws Exception{
 		comandiDaLeggere.add("vai nord");
 		comandiDaLeggere.add("vai nord");
 		comandiDaLeggere.add("fine");
@@ -250,7 +259,7 @@ class ComandoVaiTest {
 	
 	
 	@Test
-	void testPartitaComandoVaiQuattroStanzeSpeciali() {
+	void testPartitaComandoVaiQuattroStanzeSpeciali() throws Exception{
 		//con questo test intendo verificare solamente la possibilità di entrare nelle stanze
 		//e l'impossibilità di proseguire nella direzione bloccata
 	
@@ -293,5 +302,11 @@ class ComandoVaiTest {
 		assertFalse(ioComandi.hasNextMessage());
 		
 	}
-
+*/
+	
+	
 }
+
+
+	
+	

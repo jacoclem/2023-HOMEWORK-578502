@@ -1,0 +1,11 @@
+Stanza:atrio,N10,Campus,N11
+Magica:
+Bloccata:
+Buia:
+Iniziale:atrio
+Vincente:N11
+Mago:
+Strega:
+Cane:
+Attrezzo:
+Uscita:atrio nord N10,N10 est Campus,Campus sud N11,N11 ovest atrio

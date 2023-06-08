@@ -1,0 +1,11 @@
+Stanza:atrio,biblioteca
+Magica:
+Bloccata:
+Buia:
+Iniziale:atrio
+Vincente:biblioteca
+Mago:
+Strega:
+Cane:
+Attrezzo:
+Uscita:atrio nord biblioteca

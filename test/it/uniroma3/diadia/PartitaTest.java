@@ -2,12 +2,14 @@ package it.uniroma3.diadia;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileNotFoundException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+
 import it.uniroma3.diadia.ambienti.Stanza;
 
 class PartitaTest {
@@ -17,12 +19,9 @@ class PartitaTest {
 	private Stanza nuovaStanza;
 	
 	@BeforeEach
-	public void setUp() {
-		Labirinto labirinto = new LabirintoBuilder()
-				.addStanzaIniziale("atrio")
-				.addStanzaVincente("biblioteca")
-				.addAdiacenza("atrio", "biblioteca", "nord")
-				.getLabirinto();
+	public void setUp() throws FileNotFoundException, FormatoFileNonCorrettoException {
+		
+		Labirinto labirinto = Labirinto.newBuilder("Labirinto1.txt").getLabirinto();
 		this.partita = new Partita(labirinto);
 		
 		this.stanzaAttuale = new Stanza("atrio");
@@ -31,7 +30,7 @@ class PartitaTest {
 	
 	@Test
 	final void testPartita() {
-		assertSame("atrio", this.partita.getStanzaCorrente().getNome());
+		assertEquals(this.stanzaAttuale, this.partita.getStanzaCorrente());
 		assertFalse(this.partita.isFinita());
 	}
 
@@ -43,7 +42,7 @@ class PartitaTest {
 
 	@Test
 	void testGetStanzaCorrente() {
-		assertSame(this.stanzaAttuale.getNome(), this.partita.getStanzaCorrente().getNome());
+		assertEquals(this.stanzaAttuale, this.partita.getStanzaCorrente());
 	}
 
 

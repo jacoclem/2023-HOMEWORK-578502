@@ -51,4 +51,25 @@ class StanzaTest {
 		assertEquals(null, this.vuota.removeAttrezzo(this.spada));
 		
 	}
+	
+	@Test
+	final void testStanzaAdiacenteConMaxAttrezzi() {
+		Stanza stanzaDueAttrezzi = new Stanza("due-attrezzi");
+		stanzaDueAttrezzi.addAttrezzo(spada);
+		stanzaDueAttrezzi.addAttrezzo(new Attrezzo("mouse", 2));
+		this.vuota.impostaStanzaAdiacente(Direzione.nord, nonVuota);
+		this.vuota.impostaStanzaAdiacente(Direzione.sud, stanzaDueAttrezzi);
+		assertEquals(stanzaDueAttrezzi, this.vuota.getStanzaConMaxAttrezzi());
+	}
+	
+	@Test
+	final void testStanzaAdiacenteConMinAttrezzi() {
+		Stanza stanzaDueAttrezzi = new Stanza("due-attrezzi");
+		stanzaDueAttrezzi.addAttrezzo(spada);
+		stanzaDueAttrezzi.addAttrezzo(new Attrezzo("mouse", 2));
+		this.vuota.impostaStanzaAdiacente(Direzione.nord, nonVuota);
+		this.vuota.impostaStanzaAdiacente(Direzione.sud, stanzaDueAttrezzi);
+		assertEquals(nonVuota, this.vuota.getStanzaConMinAttrezzi());
+	}
+	
 }

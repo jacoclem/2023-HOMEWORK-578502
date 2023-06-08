@@ -16,7 +16,7 @@ class StanzaBloccataTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		chiave = new Attrezzo("chiave", 1);
-		stanzaBloccata = new StanzaBloccata("atrio", "nord", "chiave");
+		stanzaBloccata = new StanzaBloccata("atrio", Direzione.nord, "chiave");
 		stanzaUscita = new Stanza("uscita");
 	}
 	
@@ -27,29 +27,29 @@ class StanzaBloccataTest {
 	
 	@Test
 	final void testStanzaBloccataSenzaChiave() {
-		this.stanzaBloccata.impostaStanzaAdiacente("nord", stanzaUscita);
+		this.stanzaBloccata.impostaStanzaAdiacente(Direzione.nord, stanzaUscita);
 		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente("nord"));
 	}
 	
 	@Test
 	final void testStanzaBloccataConChiave() {
-		this.stanzaBloccata.impostaStanzaAdiacente("nord", stanzaUscita);
+		this.stanzaBloccata.impostaStanzaAdiacente(Direzione.nord, stanzaUscita);
 		this.stanzaBloccata.addAttrezzo(chiave);
 		assertEquals(this.stanzaUscita, this.stanzaBloccata.getStanzaAdiacente("nord"));
 	}
 	
 	@Test
 	final void testDescrizioneSenzaChiave() {
-		this.stanzaBloccata.impostaStanzaAdiacente("nord", stanzaUscita);
-		String output = "La porta in direzione nord sembra chiusa a chiave, cerca qualcosa per aprirla.  \nStanza corrente: " + this.stanzaBloccata.toString();
+		this.stanzaBloccata.impostaStanzaAdiacente(Direzione.nord, stanzaUscita);
+		String output = "La porta in direzione nord sembra chiusa, cerca qualcosa per aprirla.  \nStanza corrente: " + this.stanzaBloccata.toString();
 		assertEquals(output, this.stanzaBloccata.getDescrizione());
 	}
 	
 	@Test
 	final void testDescrizioneConChiave() {
-		this.stanzaBloccata.impostaStanzaAdiacente("nord", stanzaUscita);
+		this.stanzaBloccata.impostaStanzaAdiacente(Direzione.nord, stanzaUscita);
 		this.stanzaBloccata.addAttrezzo(chiave);
-		assertEquals("Stanza corrente: " + this.stanzaBloccata.toString(), this.stanzaBloccata.getDescrizione());
+		assertEquals("Stanza Corrente: " + this.stanzaBloccata.toString(), this.stanzaBloccata.getDescrizione());
 	}
 
 }

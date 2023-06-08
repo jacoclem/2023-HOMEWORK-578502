@@ -7,9 +7,9 @@ public class StanzaBloccata extends Stanza{
 	private String attrezzoCheSblocca;
 
 
-	public StanzaBloccata(String nome, String direzione, String attrezzo) {
+	public StanzaBloccata(String nome, Direzione direzione, String attrezzo) {
 		super(nome);
-		this.direzioneBloccata=direzione;
+		this.direzioneBloccata=direzione.toString();
 		this.attrezzoCheSblocca=attrezzo;
 	}
 

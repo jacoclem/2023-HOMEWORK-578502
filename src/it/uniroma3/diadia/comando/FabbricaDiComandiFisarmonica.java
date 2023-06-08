@@ -1,4 +1,4 @@
-package it.uniroma3.diadia.comando;
+/*package it.uniroma3.diadia.comando;
 
 import java.util.Scanner;
 
@@ -41,7 +41,7 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi{
 			comando = new ComandoNonValido();
 		comando.setParametro(parametro);
 		comando.setIO(io);
-		return comando;
+		return comando;	
 	}
 
-}
+}*/

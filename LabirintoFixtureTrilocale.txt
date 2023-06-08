@@ -1,0 +1,11 @@
+Stanza:atrio,campus,biblioteca
+Magica:
+Bloccata:
+Buia:
+Iniziale:atrio
+Vincente:biblioteca
+Mago:
+Strega:
+Cane:
+Attrezzo:chiave 2 atrio,computer 5 campus
+Uscita:atrio est campus,atrio nord biblioteca

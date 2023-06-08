@@ -1,0 +1,11 @@
+Stanza:atrio,campusOne,bar,giardino,biblioteca
+Magica:
+Bloccata:N10 chiave ovest
+Buia:N11 lanterna
+Iniziale:atrio
+Vincente:biblioteca
+Mago:campusOne Merlino lanterna 5 puff
+Strega:bar Ursula arrrg
+Cane:giardino Rex osso chiave 3 Woof
+Attrezzo:osso 2 N11
+Uscita:atrio ovest N11,atrio nord campusOne,atrio est bar,bar est giardino,atrio sud N10,N10 ovest biblioteca

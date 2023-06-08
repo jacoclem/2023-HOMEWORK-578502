@@ -1,7 +1,13 @@
 package it.uniroma3.diadia.fixture;
 
+import java.io.FileNotFoundException;
+import java.util.List;
+
+import it.uniroma3.diadia.DiaDia;
+import it.uniroma3.diadia.FormatoFileNonCorrettoException;
+import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+
 
 public class Fixture {
 
@@ -11,16 +17,18 @@ public class Fixture {
 	/**
 	 * Funzione che crea un labirinto con due stanze
 	 * @return labirinto
+	 * @throws FormatoFileNonCorrettoException 
+	 * @throws FileNotFoundException 
 	 */
-	public Labirinto labirintoBilocale() {
+	public Labirinto labirintoBilocale() throws FileNotFoundException, FormatoFileNonCorrettoException {
 
-		Labirinto labirinto  = new LabirintoBuilder()
+		/*Labirinto labirinto  = new LabirintoBuilder()
 				.addStanzaIniziale("aula 1")
 				.addAttrezzo("chiave", 2)
 				.addStanzaVincente("aula 2")
 				.addAdiacenza("aula 1", "aula 2", "est")
-				.getLabirinto();
-
+				.getLabirinto();*/
+		Labirinto labirinto = Labirinto.newBuilder("LabirintoFixtureBilocale.txt").getLabirinto();
 		return labirinto;
 
 	}
@@ -31,9 +39,25 @@ public class Fixture {
 	/**
 	 * Funzione che crea un labirinto con tre stanze
 	 * @return labirinto
+	 * @throws FormatoFileNonCorrettoException 
+	 * @throws FileNotFoundException 
 	 */
-	public Labirinto labirintoTrilocale() {
+
+	/*public Labirinto labirintoTrilocaleStanzaBloccataConAttrezzo() {
 		Labirinto labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("atrio")
+				.addStanzaBloccata("N11", "nord", "chiave")
+				.addAttrezzo("chiave", 2)
+				.addAdiacenza("atrio", "N11", "nord")
+				.addStanzaVincente("campus")
+				.addAdiacenza("N11", "campus", "nord")
+				.getLabirinto();
+
+		return labirinto;
+	}*/
+
+	public Labirinto labirintoTrilocale() throws FileNotFoundException, FormatoFileNonCorrettoException {
+		/*Labirinto labirinto = new LabirintoBuilder()
 				.addStanzaIniziale("atrio")
 				.addAttrezzo("chiave", 2)
 				.addStanza("campus")
@@ -42,23 +66,18 @@ public class Fixture {
 				.addStanzaVincente("biblioteca")
 				.addAdiacenza("atrio", "biblioteca", "nord")
 				.getLabirinto();
+		return labirinto;*/
+		
+		Labirinto labirinto = Labirinto.newBuilder("LabirintoFixtureTrilocale.txt").getLabirinto();
 		return labirinto;
 	}
 
-	public Labirinto labirintoTrilocaleStanzaBloccataConAttrezzo() {
-		Labirinto labirinto = new LabirintoBuilder()
-				.addStanzaIniziale("atrio")
-				.addStanzaBloccata("N11", "nord", "chiave")
-				.addAttrezzo("chiave", 2)
-				.addAdiacenza("atrio", "N11", "nord")
-				.addStanzaVincente("campus")
-				.addAdiacenza("N11", "campus", "nord")
-				.getLabirinto();
-
+	public Labirinto labirintoComplesso() throws FileNotFoundException, FormatoFileNonCorrettoException{
+		Labirinto labirinto = Labirinto.newBuilder("LabirintoFixtureComplesso.txt").getLabirinto();
 		return labirinto;
 	}
-
-	public Labirinto labirintoTrilocaleStanzaBloccataSenzaAttrezzo() {
+	
+	/*public Labirinto labirintoTrilocaleStanzaBloccataSenzaAttrezzo() {
 		Labirinto labirinto = new LabirintoBuilder()
 				.addStanzaIniziale("atrio")
 				.addStanzaBloccata("N11", "nord", "chiave")
@@ -68,14 +87,16 @@ public class Fixture {
 				.getLabirinto();
 
 		return labirinto;
-	}
+	}*/
 
 	/**
 	 * Funzione che crea un labirinto con quattro
 	 * @return labirinto
+	 * @throws FormatoFileNonCorrettoException 
+	 * @throws FileNotFoundException 
 	 */
-	public Labirinto labirintoQuattroStanzeCollegate() {
-		Labirinto labirinto = new LabirintoBuilder()
+	public Labirinto labirintoQuattroStanzeCollegate() throws FileNotFoundException, FormatoFileNonCorrettoException {
+		/*Labirinto labirinto = new LabirintoBuilder()
 				.addStanzaIniziale("atrio")
 				.addStanza("N10")
 				.addAttrezzo("quaderno", 1)
@@ -86,15 +107,21 @@ public class Fixture {
 				.addStanzaVincente("N11")
 				.addAdiacenza("Campus", "N11", "sud")
 				.addAdiacenza("N11", "atrio", "ovest")
-				.getLabirinto();		
+				.getLabirinto();	*/	
+		
+		Labirinto labirinto = Labirinto.newBuilder("LabirintoFixtureQuattroStanze.txt").getLabirinto();
+		
 		return labirinto;
+		
+		
 	}
 
 	/**
 	 * Funzione che crea un labirinto con quattro stanze speciali
 	 * @return labirinto
+	 * @throws Exception 
 	 */
-	public Labirinto labirintoQuattroStanzeSpeciali() {
+	/*public Labirinto labirintoQuattroStanzeSpeciali() {
 		Labirinto labirinto = new LabirintoBuilder()
 				.addStanzaIniziale("atrio")
 				.addStanzaBuia("magazzino", "lanterna")
@@ -110,6 +137,9 @@ public class Fixture {
 				.getLabirinto();
 
 		return labirinto;
-	}
+	}*/
+	
+	
+
 
 }

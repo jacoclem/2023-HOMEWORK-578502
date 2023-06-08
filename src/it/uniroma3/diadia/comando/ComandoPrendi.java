@@ -4,29 +4,28 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPrendi implements Comando{
+public class ComandoPrendi extends AbstractComando{
 
-	private IO io;
 	private String nomeAttrezzo;
 	
 	@Override
 	public void esegui(Partita partita) {
 		if(nomeAttrezzo == null)
-			io.mostraMessaggio("Nessun oggetto selezionato, cosa vuoi prendere ?");
+			this.getIO().mostraMessaggio("Nessun oggetto selezionato, cosa vuoi prendere ?");
 		else {
 			Attrezzo attrezzoDaPrendere = partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
 			if(attrezzoDaPrendere != null)
 				if(partita.getStanzaCorrente().hasAttrezzo(nomeAttrezzo) && ((partita.getGiocatore().getBorsa().getPeso()+attrezzoDaPrendere.getPeso())<=10))
 				{
 					partita.getGiocatore().getBorsa().addAttrezzo(partita.getStanzaCorrente().removeAttrezzo(attrezzoDaPrendere));
-					io.mostraMessaggio("Ho preso " + nomeAttrezzo);
+					this.getIO().mostraMessaggio("Ho preso " + nomeAttrezzo);
 				}
 				else
 				{
-					io.mostraMessaggio("Qualcosa è andato storto, inserisci un nuovo comando");
+					this.getIO().mostraMessaggio("Qualcosa è andato storto, inserisci un nuovo comando");
 				}
 			else
-				io.mostraMessaggio("Attrezzo non presente nella stanza");
+				this.getIO().mostraMessaggio("Attrezzo non presente nella stanza");
 		}
 		
 	}
@@ -34,12 +33,6 @@ public class ComandoPrendi implements Comando{
 	@Override
 	public void setParametro(String parametro) {
 		this.nomeAttrezzo=parametro;
-		
-	}
-
-	@Override
-	public void setIO(IO io) {
-		this.io = io;
 		
 	}
 

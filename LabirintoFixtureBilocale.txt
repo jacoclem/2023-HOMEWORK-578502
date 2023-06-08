@@ -1,0 +1,11 @@
+Stanza:aula1,aula2
+Magica:
+Bloccata:
+Buia:
+Iniziale:aula1
+Vincente:aula2
+Mago:
+Strega:
+Cane:
+Attrezzo: chiave 2 aula1
+Uscita:aula1 est aula2
